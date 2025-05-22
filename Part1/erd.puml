@@ -1,0 +1,77 @@
+@startchen
+left to right direction
+
+entity Products {
+  Id
+  Name
+  Description
+  Price
+  Category
+  Tags
+  InventoryCount
+  UPC
+  EAN
+}
+
+entity InventoryTransactions {
+  ProductID
+  Change
+  Reason
+}
+
+relationship InventoryChange {
+}
+
+entity Customers {
+  Id
+  Name {
+    FirstName
+    LastName
+  }
+  Email
+  Password
+  Phones
+  Addresses
+}
+
+entity Orders {
+  Id
+  CustomerId
+  OrderDate
+  SubTotal
+  Tax
+  ShippingCost
+  Total
+  Status
+  PaymentMethod
+  ShippingAddress
+}
+entity OrderItems {
+  Id
+  OrderId
+  ProductId
+  Quantity
+  UnitPrice
+  TotalPrice
+}
+relationship Has { 
+}
+Orders -1- Has 
+OrderItems -N- Has
+
+relationship Refer {
+}
+OrderItems -N- Refer
+Products -1- Refer
+
+relationship Purchase {
+}
+Customers -1- Purchase
+Orders -N- Purchase
+
+Products -1- InventoryChange
+InventoryTransactions -N- InventoryChange
+OrderItems -1- InventoryChange
+
+
+@endchen
